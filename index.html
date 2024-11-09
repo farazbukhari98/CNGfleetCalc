@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNG Fleet Calculator</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold text-center text-blue-800 mb-8">CNG Fleet Calculator</h1>
+        
+        <!-- Input Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <!-- Vehicle Configuration -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Vehicle Configuration</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Light Duty Vehicles</label>
+                        <input type="number" 
+                               id="lightDutyVehicles" 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                               min="0" 
+                               value="0"
+                               data-vehicle-type="lightDuty">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Medium Duty Vehicles</label>
+                        <input type="number" 
+                               id="mediumDutyVehicles" 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                               min="0" 
+                               value="0"
+                               data-vehicle-type="mediumDuty">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Heavy Duty Vehicles</label>
+                        <input type="number" 
+                               id="heavyDutyVehicles" 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                               min="0" 
+                               value="0"
+                               data-vehicle-type="heavyDuty">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Distribution Strategy</label>
+                        <select id="distributionStrategy" 
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="immediate">Immediate Purchase</option>
+                            <option value="gradual5">Gradual (5 Years)</option>
+                            <option value="gradual10">Gradual (10 Years)</option>
+                            <option value="gradual15">Gradual (15 Years)</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Station Configuration -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Station Configuration</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Station Type</label>
+                        <select id="stationType" 
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="fastFill">Fast Fill</option>
+                            <option value="timeFill">Time Fill</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Select Business</label>
+                        <select id="business" 
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="AGLC">AGLC (18.0% per year)</option>
+                            <option value="CGC">CGC (19.2% per year)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fuel Prices -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Fuel Prices</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Gasoline ($/gallon)</label>
+                        <input type="number" 
+                               id="gasolinePrice" 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                               step="0.01" 
+                               value="3.38">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Diesel ($/gallon)</label>
+                        <input type="number" 
+                               id="dieselPrice" 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                               step="0.01" 
+                               value="3.84">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">CNG Commodity Rate ($/GGE)</label>
+                        <input type="number" 
+                               id="cngRate" 
+                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" 
+                               step="0.01" 
+                               value="0.74">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Investment Analysis -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-center">Investment Analysis</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                <div class="p-4 rounded-lg bg-gray-50">
+                    <h3 class="text-sm font-medium text-gray-500">Vehicle Investment</h3>
+                    <p id="vehicleInvestment" class="text-2xl font-semibold text-right">$0</p>
+                </div>
+                <div class="p-4 rounded-lg bg-gray-50">
+                    <h3 class="text-sm font-medium text-gray-500">Station Investment</h3>
+                    <p id="stationInvestment" class="text-2xl font-semibold text-right">$0</p>
+                </div>
+                <div class="p-4 rounded-lg bg-gray-50">
+                    <h3 class="text-sm font-medium text-gray-500">Annual Fuel Savings</h3>
+                    <p id="annualFuelSavings" class="text-2xl font-semibold text-right">$0</p>
+                </div>
+                <div class="p-4 rounded-lg bg-gray-50">
+                    <h3 class="text-sm font-medium text-gray-500">Annual Maintenance Savings</h3>
+                    <p id="annualMaintenanceSavings" class="text-2xl font-semibold text-right">$0</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="p-4 rounded-lg bg-gray-50">
+                    <h3 class="text-sm font-medium text-gray-500">Total Investment</h3>
+                    <p id="totalInvestment" class="text-2xl font-semibold text-right">$0</p>
+                </div>
+                <div class="p-4 rounded-lg bg-gray-50">
+                    <h3 class="text-sm font-medium text-gray-500">Annual Total Savings</h3>
+                    <p id="annualTotalSavings" class="text-2xl font-semibold text-right">$0</p>
+                </div>
+                <div class="p-4 rounded-lg bg-gray-50">
+                    <h3 class="text-sm font-medium text-gray-500">Payback Period</h3>
+                    <p id="paybackPeriod" class="text-2xl font-semibold text-right">0 years</p>
+                </div>
+                <div class="p-4 rounded-lg bg-gray-50">
+                    <h3 class="text-sm font-medium text-gray-500">Net Total (15 years)</h3>
+                    <p id="netTotal" class="text-2xl font-semibold text-right">$0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vehicle Purchase Matrix -->
+        <div class="bg-white rounded-lg shadow p-6 overflow-x-auto">
+            <h2 class="text-xl font-semibold mb-4 text-center">Vehicle Purchase Matrix</h2>
+            <div class="matrix-container">
+                <table class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 bg-gray-50 text-left">Vehicle Type</th>
+                            <!-- JavaScript will populate year columns -->
+                        </tr>
+                    </thead>
+                    <tbody id="matrixBody">
+                        <!-- JavaScript will populate matrix rows -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

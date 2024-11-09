@@ -1,0 +1,18 @@
+{
+  "name": "cng-calc",
+  "version": "1.0.0",
+  "description": "CNG Fleet Calculator - A tool for evaluating fleet conversion to CNG",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./css/tailwind.css -o ./css/main.css",
+    "watch": "tailwindcss -i ./css/tailwind.css -o ./css/main.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14"
+  }
+}

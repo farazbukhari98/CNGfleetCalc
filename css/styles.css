@@ -1,0 +1,146 @@
+/* Custom styles beyond Tailwind */
+
+/* Form control base styles */
+input[type="number"],
+input[type="text"],
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    background-color: white;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+/* Remove spinner buttons from number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Matrix styles */
+.matrix-container {
+    overflow-x: auto;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.matrix-input {
+    width: 60px;
+    padding: 0.25rem;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    background-color: white;
+}
+
+.matrix-input:disabled {
+    background-color: #f9fafb;
+    cursor: not-allowed;
+}
+
+.matrix-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.matrix-input.input-error {
+    border-color: #ef4444;
+    background-color: #fee2e2;
+}
+
+/* Table styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #e5e7eb;
+    padding: 0.5rem;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Investment Analysis card styles */
+.analysis-card {
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Value indicators */
+.positive-value {
+    color: #059669;
+}
+
+.negative-value {
+    color: #dc2626;
+}
+
+/* Custom scrollbar for matrix */
+.matrix-container {
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 #e2e8f0;
+}
+
+.matrix-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.matrix-container::-webkit-scrollbar-track {
+    background: #e2e8f0;
+    border-radius: 4px;
+}
+
+.matrix-container::-webkit-scrollbar-thumb {
+    background-color: #94a3b8;
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .matrix-input {
+        width: 50px;
+        font-size: 0.875rem;
+    }
+    
+    th, td {
+        padding: 0.25rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .matrix-container {
+        overflow: visible;
+    }
+    
+    table {
+        page-break-inside: avoid;
+    }
+    
+    input[type="number"],
+    select {
+        border: none;
+        background: none;
+    }
+}
